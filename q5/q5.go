@@ -1,5 +1,10 @@
 package q5
 
+import (
+	"bytes"
+	"unicode"
+)
+
 //Pedro começou a frequentar aulas de programação. Na primeira aula, sua tarefa foi escrever um programa simples. O
 //programa deveria fazer o seguinte: na sequência de caracteres fornecida, composta por letras latinas maiúsculas e
 //minúsculas, ele:
@@ -15,6 +20,18 @@ package q5
 //Ajude Pedro a lidar com esta tarefa fácil.
 
 func ProcessString(s string) string {
-	// Seu código aqui
-	return ""
+	var buffer bytes.Buffer
+	for _, c := range s {
+		if !unicode.IsLetter(c) {
+			continue
+		}
+		switch unicode.ToLower(c) {
+		case 'a', 'e', 'i', 'o', 'u':
+			continue
+		default:
+			buffer.WriteString(".")
+			buffer.WriteRune(unicode.ToLower(c))
+		}
+	}
+	return buffer.String()
 }

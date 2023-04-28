@@ -1,4 +1,5 @@
 package bonus
+import "sort"
 
 //Joãozinho ganhou um kit de construção de torres. O kit é composto por várias barras de madeira, e seus comprimentos são
 //conhecidos. As barras podem ser empilhadas umas sobre as outras, desde que seus comprimentos sejam iguais.
@@ -7,6 +8,24 @@ package bonus
 //barras da melhor maneira possível, determinando a altura da torre mais alta e quantas torres podem ser construídas.
 
 func CalculateTowers(barLengths []int) (int, int) {
-	// Seu código aqui
-	return 0, 0
+	maior_1:= 1
+	maior := 1
+	torre := len(barLengths)
+	sort.Ints(barLengths)
+	elemento := 0
+	for elemento < (len(barLengths) - 1) {
+		if barLengths[elemento] == barLengths[elemento+1] {
+			maior += 1
+
+			if maior > maior_1 && maior > 1 {
+				maior_1 = maior
+			}
+
+			torre -= 1
+		} else {
+			maior = 1
+		}
+		elemento++
+	}
+	return maior_1, torre
 }
